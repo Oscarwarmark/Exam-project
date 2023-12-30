@@ -4,5 +4,11 @@
     "name": "oscar",
     "email": "oscar.warmark@gmail.com",
     "password": "$2b$10$xgkwluKytusJZ/wQf49UluLPCeKFuEN6g0yxzHCUNPKiqUAHNk8EK"
+  },
+  {
+    "id": "cus_PHJ4JSTt5HIvnD",
+    "name": "ver",
+    "email": "ver@gmail.com",
+    "password": "$2b$10$XMGolbm4JUTiUTEyK.fFQuv6GzazX7IqEA8glipQg0BEHnU.eJYbG"
   }
 ]

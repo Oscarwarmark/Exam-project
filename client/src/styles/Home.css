@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Open+Sans:wght@300&family=Roboto:wght@500&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+}
+a {
+  display: inline;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.product-card {
+  width: 15rem;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 1rem;
+  border: 1px solid rgb(57, 129, 254);
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
