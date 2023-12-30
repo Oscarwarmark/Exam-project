@@ -1,14 +1,16 @@
-import React from "react";
 import Header from "../components/Header";
+import "../Styles/home.css";
 import ProductCard from "../components/ProductCard";
-function ProductsPage() {
+
+const Home = () => {
   return (
     <div>
       <Header />
-      <p>ProductsPage</p>
-      <ProductCard />
+      <div>
+        <ProductCard />
+      </div>
     </div>
   );
-}
+};
 
-export default ProductsPage;
+export default Home;

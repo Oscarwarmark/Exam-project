@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
 import "../Styles/Header.css";
-import SignIn from "./SignIn";
-import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import MobileNavigation from "./MobileNavigaton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { IconButton } from "@mui/material";
 
 const Header = () => {
   const { cartItems, cartQuantity } = useContext(MyCartContext);
@@ -21,9 +20,11 @@ const Header = () => {
         </NavLink>
         <div className="buttons-container">
           <div className="cart">
-            <NavLink to="/cart">
-              <ShoppingCartIcon />
-            </NavLink>
+            <IconButton>
+              <NavLink to="/cart">
+                <ShoppingCartIcon />
+              </NavLink>
+            </IconButton>
             <p>{cartQuantity}</p>
           </div>
         </div>
