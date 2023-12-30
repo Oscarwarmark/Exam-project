@@ -1,19 +1,22 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
 .header-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
-}
-
-.title {
-  margin-left: 2rem;
+  border-bottom: 1px solid black;
 }
 
 .buttons-container {
   display: flex;
   align-items: center;
-  margin-right: 3rem;
+  justify-content: center;
   gap: 0.3rem;
+  width: 180px;
 }
 
 .header-button {
@@ -48,9 +51,46 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 3.7rem;
+  margin-left: 1rem;
   margin-top: -0.5rem;
   border-radius: 10px;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.left-contatiner {
+  width: 180px;
+}
+
+.navigation-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.navlink-list {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+@media (max-width: 800px) {
+  .navigation-container {
+    display: none;
+  }
+  .buttons-container {
+  }
+  .header-container {
+  }
+  .left-contatiner {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 800px) {
+  .left-contatiner button {
+    display: flex;
+    align-items: center;
+    display: none;
+  }
 }
