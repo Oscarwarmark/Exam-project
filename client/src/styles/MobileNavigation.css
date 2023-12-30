@@ -1,0 +1,12 @@
+.mobile-navigation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-navlinks {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
