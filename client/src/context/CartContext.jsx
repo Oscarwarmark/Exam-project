@@ -7,10 +7,12 @@ export const MyCartContext = createContext({
   products: [],
   setProducts: () => {},
   cartQuantity: "",
+  decreaseQuantity: () => {},
+  increaseQuantity: () => {},
 });
 
 const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useLocalStorage("cart", []);
+  const [cartItems, setCartItems] = useLocalStorage("cart", []); // cart array
   const [products, setProducts] = useState([]);
   const [cartQuantity, setCartQuantity] = useState([]);
 
@@ -33,6 +35,38 @@ const CartProvider = ({ children }) => {
     console.log(cartItems);
   }, [cartItems]);
 
+  function increaseQuantity(cart, productId) {
+    const updatedCart = cart.map((item) => {
+      if (item.product.id === productId) {
+        return {
+          ...item,
+          quantity: item.quantity + 1,
+        };
+      }
+      return item;
+    });
+
+    setCartItems(updatedCart);
+    return updatedCart;
+  }
+
+  function decreaseQuantity(cart, productId) {
+    const updatedCart = cart.map((item) => {
+      if (item.product.id === productId && item.quantity > 0) {
+        return {
+          ...item,
+          quantity: item.quantity - 1,
+        };
+      }
+      return item;
+    });
+
+    const filteredCart = updatedCart.filter((item) => item.quantity > 0); // Remove items with quantity 0
+
+    setCartItems(filteredCart); // Update the cart items in the context
+    return filteredCart;
+  }
+
   return (
     <MyCartContext.Provider
       value={{
@@ -41,6 +75,8 @@ const CartProvider = ({ children }) => {
         products,
         setProducts,
         cartQuantity,
+        decreaseQuantity,
+        increaseQuantity,
       }}
     >
       {children}
