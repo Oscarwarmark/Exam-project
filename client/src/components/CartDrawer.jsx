@@ -35,9 +35,16 @@ function CartDrawer() {
           <div>
             <CartItem />
           </div>
-          <NavLink to="/cart">
-            <Button variant="outlined">Till kassan</Button>
-          </NavLink>
+          <div className="checkout-btn">
+            <NavLink to="/cart">
+              <Button
+                variant="outlined"
+                style={{ borderColor: "black", color: "black" }}
+              >
+                Gå till kassan
+              </Button>
+            </NavLink>
+          </div>
         </div>
       </Drawer>
     </>

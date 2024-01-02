@@ -2,7 +2,9 @@ import React from "react";
 import { useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import { Button } from "@mui/material";
-
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
+import { IconButton } from "@mui/material";
 function CartItem() {
   const { cartItems, decreaseQuantity, increaseQuantity } =
     useContext(MyCartContext);
@@ -25,21 +27,21 @@ function CartItem() {
             <p>{`${product.product.default_price.unit_amount / 100} kr`}</p>
           </div>
           <div className="cart-amount">
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() => handleDecreaseQuantity(product.product.id)}
-            >
-              -
-            </Button>
+            <IconButton>
+              <RemoveCircleOutlineOutlinedIcon
+                onClick={() => handleDecreaseQuantity(product.product.id)}
+              >
+                -
+              </RemoveCircleOutlineOutlinedIcon>
+            </IconButton>
             <p> {product.quantity}</p>
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() => handleIncreaseQuantity(product.product.id)}
-            >
-              +
-            </Button>
+            <IconButton>
+              <AddCircleOutlineOutlinedIcon
+                onClick={() => handleIncreaseQuantity(product.product.id)}
+              >
+                +
+              </AddCircleOutlineOutlinedIcon>
+            </IconButton>
           </div>
         </div>
       ))}
