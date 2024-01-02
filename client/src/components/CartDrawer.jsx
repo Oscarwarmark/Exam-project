@@ -6,10 +6,11 @@ import { useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import Button from "@mui/material/Button";
 import "../styles/CartDrawer.css";
+import CartItem from "./CartItem";
 
 function CartDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { cartItems, cartQuantity } = useContext(MyCartContext);
+  const { cartQuantity } = useContext(MyCartContext);
 
   return (
     <>
@@ -33,24 +34,19 @@ function CartDrawer() {
         <div className="mobile-navigation-container">
           <h1 className="cart-title">Kundvagn</h1>
           <div>
-            <div className="">
-              {cartItems.map((product, i) => (
-                <div key={i} className="cart-drawer-productcard">
-                  <img src={`${product.product.images}`} alt="" />
-                  <div className="cart-productcard-info">
-                    <h4>{product.product.name}</h4>
-                    <p>{`${
-                      product.product.default_price.unit_amount / 100
-                    } kr`}</p>
-                  </div>
-                  <p className="cart-amount">Antal: {product.quantity}</p>
-                </div>
-              ))}
-            </div>
+            <CartItem />
           </div>
-          <NavLink to="/cart">
-            <Button variant="outlined">Till kassan</Button>
-          </NavLink>
+
+          <div className="checkout-btn">
+            <NavLink to="/cart">
+              <Button
+                variant="outlined"
+                style={{ borderColor: "black", color: "black" }}
+              >
+                Gå till kassan
+              </Button>
+            </NavLink>
+          </div>
         </div>
       </Drawer>
     </>

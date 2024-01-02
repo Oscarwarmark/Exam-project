@@ -6,13 +6,14 @@ import { MyCartContext } from "../context/CartContext";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Button from "@mui/material/Button";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const { cartItems } = useContext(MyCartContext);
   const { isLoggedIn } = useContext(UserContext);
 
   const cart = cartItems.map((item) => ({
-    product: item.product.default_price,
+    product: item.product.default_price.id,
     quantity: item.quantity,
   }));
 
@@ -38,18 +39,7 @@ const Cart = () => {
       <Header />
       <div className="cart-container">
         <h2>Varor i kundvagn</h2>
-        <div className="cart-drawer-container">
-          {cartItems.map((product, i) => (
-            <div key={i} className="cart-drawer-productcard">
-              <img src={`${product.product.images}`} alt="" />
-              <div className="cart-productcard-info">
-                <h4>{product.product.name}</h4>
-                <p>{`${product.product.default_price.unit_amount / 100} kr`}</p>
-              </div>
-              <p className="cart-amount">Antal: {product.quantity}</p>
-            </div>
-          ))}
-        </div>
+        <CartItem />
 
         {isLoggedIn ? (
           <div>
