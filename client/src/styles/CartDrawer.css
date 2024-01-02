@@ -1,6 +1,7 @@
 .cart-drawer-productcard img {
   width: 5rem;
   height: 5rem;
+  margin-left: 1rem;
 }
 
 .cart-drawer-productcard {
@@ -28,7 +29,7 @@
 }
 
 .cart-amount {
-  margin-right: 2rem;
+  margin-right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
