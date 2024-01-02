@@ -1,0 +1,35 @@
+.cart-drawer-productcard img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.cart-drawer-productcard {
+  display: flex;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  width: 30rem;
+}
+
+.cart-productcard-info {
+  margin-right: 10rem;
+}
+
+.cart-title {
+  margin-bottom: 2rem;
+}
+
+.cart-drawer-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cart-amount {
+  margin-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

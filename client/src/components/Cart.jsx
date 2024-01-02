@@ -38,15 +38,19 @@ const Cart = () => {
       <Header />
       <div className="cart-container">
         <h2>Varor i kundvagn</h2>
-        <div className="products-container">
+        <div className="cart-drawer-container">
           {cartItems.map((product, i) => (
-            <div key={i} className="cart-product-card">
+            <div key={i} className="cart-drawer-productcard">
               <img src={`${product.product.images}`} alt="" />
-              <h1>{product.product.name}</h1>
-              <p>Antal: {product.quantity}</p>
+              <div className="cart-productcard-info">
+                <h4>{product.product.name}</h4>
+                <p>{`${product.product.default_price.unit_amount / 100} kr`}</p>
+              </div>
+              <p className="cart-amount">Antal: {product.quantity}</p>
             </div>
           ))}
         </div>
+
         {isLoggedIn ? (
           <div>
             <Button variant="outlined" onClick={HandelPayment}>

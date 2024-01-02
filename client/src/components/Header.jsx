@@ -1,14 +1,8 @@
 import { NavLink } from "react-router-dom";
 import "../Styles/Header.css";
-import { useContext } from "react";
-import { MyCartContext } from "../context/CartContext";
 import MobileNavigation from "./MobileNavigaton";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { IconButton } from "@mui/material";
-
+import CartDrawer from "./CartDrawer";
 const Header = () => {
-  const { cartItems, cartQuantity } = useContext(MyCartContext);
-
   return (
     <div className="header">
       <div className="header-container">
@@ -19,14 +13,7 @@ const Header = () => {
           <h1 className="logo">Oscars Webbshop</h1>
         </NavLink>
         <div className="buttons-container">
-          <div className="cart">
-            <IconButton>
-              <NavLink to="/cart">
-                <ShoppingCartIcon />
-              </NavLink>
-            </IconButton>
-            <p>{cartQuantity}</p>
-          </div>
+          <CartDrawer />
         </div>
       </div>
       <div className="navigation-container">
