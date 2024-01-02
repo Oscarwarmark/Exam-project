@@ -9,6 +9,7 @@ export const MyCartContext = createContext({
   cartQuantity: "",
   decreaseQuantity: () => {},
   increaseQuantity: () => {},
+  calculateTotalPrice: () => {},
 });
 
 const CartProvider = ({ children }) => {
@@ -67,6 +68,17 @@ const CartProvider = ({ children }) => {
     return filteredCart;
   }
 
+  function calculateTotalPrice(cart) {
+    let totalPrice = 0;
+
+    cart.forEach((item) => {
+      totalPrice +=
+        item.quantity * (item.product.default_price.unit_amount / 100);
+    });
+
+    return totalPrice;
+  }
+
   return (
     <MyCartContext.Provider
       value={{
@@ -77,6 +89,7 @@ const CartProvider = ({ children }) => {
         cartQuantity,
         decreaseQuantity,
         increaseQuantity,
+        calculateTotalPrice,
       }}
     >
       {children}

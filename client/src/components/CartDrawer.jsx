@@ -11,6 +11,7 @@ import CartItem from "./CartItem";
 function CartDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { cartQuantity } = useContext(MyCartContext);
+
   return (
     <>
       <div className="cart">
@@ -35,6 +36,7 @@ function CartDrawer() {
           <div>
             <CartItem />
           </div>
+
           <div className="checkout-btn">
             <NavLink to="/cart">
               <Button

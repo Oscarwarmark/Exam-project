@@ -44,6 +44,12 @@
   margin-right: 1rem;
 }
 
+.total-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 800px) {
   .cart-drawer-productcard {
     display: flex;
