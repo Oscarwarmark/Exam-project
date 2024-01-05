@@ -4,6 +4,7 @@ const { initStripe } = require("../stripe");
 const stripe = initStripe();
 const CustomerDB = "./db/customerDB.json";
 const { UserModel } = require("../models/customer.model");
+const { log } = require("console");
 
 const createCustomer = async (req, res) => {
   const customerData = req.body;
@@ -41,36 +42,33 @@ const createCustomer = async (req, res) => {
 };
 
 const logInCustomer = async (req, res) => {
-  const UserData = req.body;
+  try {
+    const existingUser = await UserModel.findOne({
+      email: req.body.email,
+    }).select("+password");
 
-  fs.readFile(CustomerDB, "utf-8", async (err, data) => {
-    if (err) {
-      console.log(err.message);
-    } else {
-      const customersInDB = JSON.parse(data);
-
-      const existingUser = customersInDB.find(
-        (user) => user.email === UserData.email
-      );
-
-      if (existingUser) {
-        const match = await bcrypt.compare(
-          UserData.password,
-          existingUser.password
-        );
-
-        if (!match) {
-          console.log("wrong password");
-          return res.status(401).json("wrong password");
-        } else {
-          delete existingUser.password;
-          req.session = existingUser;
-          res.status(201).json(req.session);
-          console.log(req.session);
-        }
-      }
+    if (
+      !existingUser ||
+      !(await bcrypt.compare(req.body.password, existingUser.password))
+    ) {
+      return res.status(401).json("Wrong password or username");
     }
-  });
+
+    const user = {
+      _id: existingUser._id,
+      // Other user properties you want to include in the session
+      // Avoid sensitive data here
+    };
+
+    // Set session data
+    console.log(user);
+    req.session.user = user;
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json("Internal Server Error");
+  }
 };
 
 const logOutCustomer = async (req, res) => {
