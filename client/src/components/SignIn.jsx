@@ -42,8 +42,8 @@ const SignIn = () => {
     if (!response.ok) {
       throw new Error("wrong password ");
     } else {
-      console.log(response);
       setIsLoggedIn(true);
+      console.log(isLoggedIn);
       handleClose();
     }
   };

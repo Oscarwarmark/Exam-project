@@ -43,6 +43,7 @@ const Cart = () => {
 
         {isLoggedIn ? (
           <div>
+            <SignIn />
             <Button variant="outlined" onClick={HandelPayment}>
               Gå till betalning
             </Button>

@@ -42,33 +42,30 @@ const createCustomer = async (req, res) => {
 };
 
 const logInCustomer = async (req, res) => {
-  try {
-    const existingUser = await UserModel.findOne({
-      email: req.body.email,
-    }).select("+password");
+  // Check if username and password is correct
+  const existingUser = await UserModel.findOne({
+    email: req.body.email,
+  }).select("+password");
 
-    if (
-      !existingUser ||
-      !(await bcrypt.compare(req.body.password, existingUser.password))
-    ) {
-      return res.status(401).json("Wrong password or username");
-    }
-
-    const user = {
-      _id: existingUser._id,
-      // Other user properties you want to include in the session
-      // Avoid sensitive data here
-    };
-
-    // Set session data
-    console.log(user);
-    req.session.user = user;
-
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json("Internal Server Error");
+  if (
+    !existingUser ||
+    !(await bcrypt.compare(req.body.password, existingUser.password))
+  ) {
+    return res.status(401).json("Wrong password or username");
   }
+
+  const user = existingUser.toJSON();
+  user._id = existingUser._id;
+  delete user.password;
+
+  // Check if user already is logged in
+  if (req.session._id) {
+    return res.status(200).json(user);
+  }
+
+  // Save info about the user to the session (an encrypted cookie stored on the client)
+  req.session = user;
+  res.status(200).json(user);
 };
 
 const logOutCustomer = async (req, res) => {
@@ -77,4 +74,11 @@ const logOutCustomer = async (req, res) => {
   console.log("signed out", req.session);
 };
 
-module.exports = { createCustomer, logInCustomer, logOutCustomer };
+async function authorize(req, res) {
+  if (!req.session._id) {
+    return res.status(401).json("You are not logged in");
+  }
+  res.status(200).json(req.session);
+}
+
+module.exports = { createCustomer, logInCustomer, logOutCustomer, authorize };
