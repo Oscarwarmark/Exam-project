@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const { initStripe } = require("../stripe");
 const stripe = initStripe();
 const CustomerDB = "./db/customerDB.json";
+const { UserModel } = require("../models/customer.model");
+const { log } = require("console");
 
 const createCustomer = async (req, res) => {
   const customerData = req.body;
@@ -20,60 +22,50 @@ const createCustomer = async (req, res) => {
       password: "",
     };
 
-    const hashedPassword = await bcrypt.hash(customerData.password, 10);
-    newCustomer.password = hashedPassword;
+    // Check if the user exists
 
-    fs.readFile(CustomerDB, "utf-8", (err, data) => {
-      if (err) {
-        console.log(err.message);
-      } else {
-        const customers = JSON.parse(data);
-        customers.push(newCustomer);
+    const existingUser = await UserModel.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(409).json("Email already registred");
+    }
 
-        fs.writeFile(CustomerDB, JSON.stringify(customers, null, 2), (err) => {
-          if (err) {
-            console.log(err.message);
-          } else {
-            console.log("New customers saved to DB");
-            res.status(201).json(newCustomer);
-          }
-        });
-      }
-    });
+    const user = new UserModel(req.body);
+    user.password = await bcrypt.hash(user.password, 10);
+    await user.save();
+
+    const jsonUser = user.toJSON();
+    jsonUser._id = user._id;
+    delete jsonUser.password;
+
+    res.status(201).send(jsonUser);
   }
 };
 
 const logInCustomer = async (req, res) => {
-  const UserData = req.body;
+  // Check if username and password is correct
+  const existingUser = await UserModel.findOne({
+    email: req.body.email,
+  }).select("+password");
 
-  fs.readFile(CustomerDB, "utf-8", async (err, data) => {
-    if (err) {
-      console.log(err.message);
-    } else {
-      const customersInDB = JSON.parse(data);
+  if (
+    !existingUser ||
+    !(await bcrypt.compare(req.body.password, existingUser.password))
+  ) {
+    return res.status(401).json("Wrong password or username");
+  }
 
-      const existingUser = customersInDB.find(
-        (user) => user.email === UserData.email
-      );
+  const user = existingUser.toJSON();
+  user._id = existingUser._id;
+  delete user.password;
 
-      if (existingUser) {
-        const match = await bcrypt.compare(
-          UserData.password,
-          existingUser.password
-        );
+  // Check if user already is logged in
+  if (req.session._id) {
+    return res.status(200).json(user);
+  }
 
-        if (!match) {
-          console.log("wrong password");
-          return res.status(401).json("wrong password");
-        } else {
-          delete existingUser.password;
-          req.session = existingUser;
-          res.status(201).json(req.session);
-          console.log(req.session);
-        }
-      }
-    }
-  });
+  // Save info about the user to the session (an encrypted cookie stored on the client)
+  req.session = user;
+  res.status(200).json(user);
 };
 
 const logOutCustomer = async (req, res) => {
@@ -82,4 +74,11 @@ const logOutCustomer = async (req, res) => {
   console.log("signed out", req.session);
 };
 
-module.exports = { createCustomer, logInCustomer, logOutCustomer };
+async function authorize(req, res) {
+  if (!req.session._id) {
+    return res.status(401).json("You are not logged in");
+  }
+  res.status(200).json(req.session);
+}
+
+module.exports = { createCustomer, logInCustomer, logOutCustomer, authorize };

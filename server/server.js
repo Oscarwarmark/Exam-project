@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const mongoose = require("mongoose");
 
 const checkoutRoutes = require("./routes/checkout.route");
 const productsRoutes = require("./routes/products.route");
@@ -9,6 +10,18 @@ const customerRoutes = require("./routes/customer.route");
 
 const CLIENT_URL = "http://localhost:5173";
 const app = express();
+
+// Connect to MongoDB
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err.message);
+  });
 
 app.use(
   cookieSession({
