@@ -1,10 +1,9 @@
-const fs = require("fs");
 const bcrypt = require("bcrypt");
 const { initStripe } = require("../stripe");
 const stripe = initStripe();
-const CustomerDB = "./db/customerDB.json";
 const { UserModel } = require("../models/customer.model");
-const { log } = require("console");
+require("dotenv").config();
+const { OAuth2Client } = require("google-auth-library");
 
 const createCustomer = async (req, res) => {
   const customerData = req.body;
@@ -74,6 +73,30 @@ const logOutCustomer = async (req, res) => {
   console.log("signed out", req.session);
 };
 
+async function signInWithGoogle(req, res) {
+  res.header("accsess-control-allow-origin", "http://loclalhost:5173");
+  res.header("Referrer-policy", "no-referrer-when-downgrade");
+
+  const redirectUrl = "http://127.0.0.1:3000/oauth";
+
+  const oAuth2Client = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    redirectUrl
+  );
+
+  const authorizeUrl = oAuth2Client.generateAuthUrl({
+    access_type: "offline",
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+    ],
+    prompt: "consent",
+  });
+
+  res.json({ url: authorizeUrl });
+}
+
 async function authorize(req, res) {
   if (!req.session._id) {
     return res.status(401).json("You are not logged in");
@@ -81,4 +104,10 @@ async function authorize(req, res) {
   res.status(200).json(req.session);
 }
 
-module.exports = { createCustomer, logInCustomer, logOutCustomer, authorize };
+module.exports = {
+  createCustomer,
+  logInCustomer,
+  logOutCustomer,
+  authorize,
+  signInWithGoogle,
+};

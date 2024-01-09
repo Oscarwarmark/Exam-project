@@ -60,6 +60,17 @@ const SignIn = () => {
     }
   };
 
+  function navigate(url) {
+    window.location.href = url;
+  }
+
+  const auth = async () => {
+    const respons = await fetch("/api/customer/google", { method: "POST" });
+    const data = await respons.json();
+    console.log(data);
+    navigate(data.url);
+  };
+
   return (
     <div>
       {isLoggedIn ? (
@@ -70,6 +81,9 @@ const SignIn = () => {
         <>
           <Button variant="outlined" onClick={handleClickOpen}>
             Logga in
+          </Button>
+          <Button type="button" onClick={() => auth()}>
+            google
           </Button>
         </>
       )}
