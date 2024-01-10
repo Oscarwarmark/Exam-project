@@ -30,8 +30,10 @@ const Cart = () => {
       return;
     }
 
-    const { url } = await response.json();
-    window.location = url;
+    const responseData = await response.json(); // Consume the response body once
+    console.log(responseData); // Log the entire response data if needed
+    const { url } = responseData; // Extract URL from response data
+    window.location = url; // Redirect to the URL
   }
 
   return (
