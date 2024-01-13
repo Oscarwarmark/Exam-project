@@ -14,8 +14,9 @@ const AddressSchema = new Schema(
 const OrderItemSchema = new Schema(
   {
     product: { type: String, required: true },
+    productName: { type: String, required: true },
     quantity: { type: Number, required: true },
-    price: { type: Number, default: 0 },
+    unitPrice: { type: Number, default: 0 },
   },
   { _id: false }
 );
@@ -25,6 +26,8 @@ const OrderSchema = new Schema(
     orderNumber: { type: String, required: true },
     customer: { type: Schema.Types.ObjectId, ref: "user", required: true },
     orderItems: { type: [OrderItemSchema], required: true },
+    totalOrderPrice: { type: Number, required: true },
+    name: { type: String, required: true },
     // deliveryAddress: { type: AddressSchema, required: true },
     // shipped: { type: Boolean, required: false, default: false },
     // shippingMethod: {
@@ -40,31 +43,31 @@ const OrderSchema = new Schema(
 
 const OrderModel = models.order || model("order", OrderSchema);
 
-// const OrderCreateValidationSchema = Joi.object({
-//   orderItems: Joi.array()
-//     .items(
-//       Joi.object({
-//         product: Joi.string().strict().required(),
-//         quantity: Joi.number().strict().required(),
-//         price: Joi.number(),
-//       })
-//     )
-//     .strict()
-//     .required(),
-//   deliveryAddress: Joi.object({
-//     street: Joi.string().strict().required(),
-//     zipcode: Joi.string().strict().required(),
-//     city: Joi.string().strict().required(),
-//     country: Joi.string().strict().required(),
-//   })
-//     .strict()
-//     .required(),
-//   shippingMethod: Joi.string().strict().required(),
-// });
+const OrderCreateValidationSchema = Joi.object({
+  orderItems: Joi.array()
+    .items(
+      Joi.object({
+        product: Joi.string().strict().required(),
+        quantity: Joi.number().strict().required(),
+        price: Joi.number(),
+      })
+    )
+    .strict()
+    .required(),
+  // deliveryAddress: Joi.object({
+  //   street: Joi.string().strict().required(),
+  //   zipcode: Joi.string().strict().required(),
+  //   city: Joi.string().strict().required(),
+  //   country: Joi.string().strict().required(),
+  // })
+  //   .strict()
+  //   .required(),
+  // shippingMethod: Joi.string().strict().required(),
+});
 
-// const OrderUpdateValidationSchema = OrderCreateValidationSchema.keys({
-//   _id: Joi.string().strict().required(),
-// });
+const OrderUpdateValidationSchema = OrderCreateValidationSchema.keys({
+  _id: Joi.string().strict().required(),
+});
 
 module.exports = {
   OrderModel,

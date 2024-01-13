@@ -4,7 +4,7 @@ import { MyCartContext } from "../context/CartContext";
 
 function Confirmation() {
   const { setCartItems } = useContext(MyCartContext);
-  const [isPaymentVerifyed, setIsPaymentVerifyed] = useState();
+  const [isPaymentVerified, setIsPaymentVerified] = useState();
 
   const verifyPayment = async () => {
     const sessionId = sessionStorage.getItem("stripe-session-id");
@@ -17,14 +17,15 @@ function Confirmation() {
       body: JSON.stringify({ sessionId }),
     });
 
-    const { verifyed } = await response.json();
+    const { verified } = await response.json();
+    console.log(response);
 
-    if (verifyed) {
-      setIsPaymentVerifyed(true);
+    if (verified) {
+      setIsPaymentVerified(true);
       sessionStorage.removeItem("stripe-session-id");
       setCartItems([]);
     } else {
-      setIsPaymentVerifyed(false);
+      setIsPaymentVerified(false);
     }
   };
 

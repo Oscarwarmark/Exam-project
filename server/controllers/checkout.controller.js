@@ -46,11 +46,12 @@ const verifyStripeSession = async (req, res) => {
     // Retrieve product information for each line item
     const productPromises = lineItems.data.map(async (item) => {
       const product = await stripe.products.retrieve(item.price.product);
-
+      console.log("hej", product);
       return {
         totalPrice: item.amount_total / 100,
         discount: item.amount_discount,
         product: product.id,
+        productName: product.name,
         unitPrice: item.price.unit_amount / 100,
         quantity: item.quantity,
         image: product.images[0],
@@ -62,10 +63,10 @@ const verifyStripeSession = async (req, res) => {
     console.log("line_items", lineItems);
 
     console.log("products", products);
-    console.log("session", session);
+    console.log("session", session.customer_details.name);
     // Create a new order instance using the OrderModel
     const order = new OrderModel({
-      customer: session.customer,
+      customer: req.session._id,
       orderNumber: session.payment_intent.substring(3),
       name: session.customer_details.name,
       totalOrderPrice: session.amount_total / 100,
