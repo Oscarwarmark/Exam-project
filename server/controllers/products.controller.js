@@ -11,7 +11,6 @@ const getProducts = async (req, res) => {
     });
 
     res.status(200).json(products.data);
-    console.log(products);
   } catch (error) {
     console.error("Error retrieving products:", error);
   }

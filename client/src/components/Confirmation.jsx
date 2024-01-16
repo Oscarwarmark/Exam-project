@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import Header from "./Header";
 import { MyCartContext } from "../context/CartContext";
+const CLIENT_URL = "http://localhost:5173";
 
 function Confirmation() {
   const { setCartItems } = useContext(MyCartContext);
@@ -17,13 +18,14 @@ function Confirmation() {
       body: JSON.stringify({ sessionId }),
     });
 
-    const { verified } = await response.json();
+    const { verified, orderId } = await response.json();
     console.log(response);
 
     if (verified) {
       setIsPaymentVerified(true);
       sessionStorage.removeItem("stripe-session-id");
       setCartItems([]);
+      window.location.href = `${CLIENT_URL}/confirmation/${orderId}`;
     } else {
       setIsPaymentVerified(false);
     }

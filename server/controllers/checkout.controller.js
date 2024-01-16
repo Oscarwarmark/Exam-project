@@ -77,7 +77,7 @@ const verifyStripeSession = async (req, res) => {
     await order.save();
 
     // Send a successful verification response
-    res.status(200).json({ verified: true });
+    res.status(200).json({ verified: true, orderId: order._id });
   } catch (error) {
     console.error("Error in verifyStripeSession:", error.message);
     // Send error response to the client
@@ -85,4 +85,22 @@ const verifyStripeSession = async (req, res) => {
   }
 };
 
-module.exports = { createCheckoutSession, verifyStripeSession };
+const getOrderDetails = async (req, res) => {
+  try {
+    const order = await OrderModel.findById(req.params.orderId);
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.status(200).json({ order });
+  } catch (error) {
+    console.error("Error fetching order:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = {
+  getOrderDetails,
+  createCheckoutSession,
+  verifyStripeSession,
+};
