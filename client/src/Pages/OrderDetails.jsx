@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import "../styles/OrderDetails.css";
+import Header from "../components/Header";
 const OrderDetails = () => {
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
@@ -55,13 +56,26 @@ const OrderDetails = () => {
   // Render your confirmation page with the order details
   return (
     <div>
-      <h1>Order Confirmation</h1>
-      <p>Order Number: {order.orderNumber}</p>
-      <p>Name: {order.name}</p>
-      <p></p>
+      <Header />
+      <div className="confirmation-container">
+        <h1>Thank you for your order!</h1>
+        <h2>Order Confirmation</h2>
+        <p>Order Number: {order.orderNumber}</p>
+        <h2>Products</h2>
+        <div>
+          {order.orderItems.map((product, i) => (
+            <div className="order-products">
+              <p>{product.quantity} st</p>
+              <p>{product.productName}:</p>
+              <p>{`${product.unitPrice} kr`}</p>
+            </div>
+          ))}
+        </div>
 
-      {/* Display other order details as needed */}
-      <button onClick={navigateToHome}>Go to Home</button>
+        <p>Order total: {order.totalOrderPrice}kr</p>
+        {/* Display other order details as needed */}
+        <button onClick={navigateToHome}>Go to Home</button>
+      </div>
     </div>
   );
 };
