@@ -58,6 +58,7 @@ const OrderDetails = () => {
       <h1>Order Confirmation</h1>
       <p>Order Number: {order.orderNumber}</p>
       <p>Name: {order.name}</p>
+      <p></p>
 
       {/* Display other order details as needed */}
       <button onClick={navigateToHome}>Go to Home</button>
