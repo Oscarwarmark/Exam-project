@@ -39,7 +39,7 @@ app.use(
 );
 app.use(express.json());
 
-app.use("/api/create-checkout-session", checkoutRoutes);
+app.use("/api/checkout", checkoutRoutes);
 app.use("/api/getProducts", productsRoutes);
 app.use("/api/customer", customerRoutes);
 
