@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import Button from "@mui/material/Button";
 import "../styles/ProductCard.css";
+import { Link } from "react-router-dom";
 const ProductCard = () => {
   const { products, setProducts, cartItems, setCartItems } =
     useContext(MyCartContext);
@@ -56,16 +57,19 @@ const ProductCard = () => {
 
   return (
     <div>
-      <div>
+      <div className="products-container">
         <div className="main-container">
           {products.map((product, i) => (
             <div key={i} className="product-card">
-              <img src={`${product.images}`} alt="" />
-              <h1>{product.name}</h1>
-              <p>{`${product.default_price.unit_amount / 100} kr`}</p>
-              <Button variant="outlined" onClick={() => handleClick(product)}>
-                lägg till i kundvagn
-              </Button>
+              <Link to={`/Products/${product.id}`}>
+                <img src={`${product.images}`} alt="" />
+                <h1>{product.name}</h1>
+                <p>{`${product.default_price.unit_amount / 100} kr`}</p>
+
+                <Button variant="outlined" onClick={() => handleClick(product)}>
+                  lägg till i kundvagn
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

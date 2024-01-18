@@ -10,7 +10,7 @@ const Header = () => {
           <MobileNavigation />
         </div>
         <NavLink to="/" className="title">
-          <h1 className="logo">Oscars Warmark</h1>
+          <h1 className="logo">Oscar Warmark</h1>
         </NavLink>
         <div className="buttons-container">
           <CartDrawer />

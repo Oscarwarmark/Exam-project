@@ -3,18 +3,13 @@
 body {
   font-family: "Roboto", sans-serif;
   margin: 0px;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 a {
   display: inline;
   cursor: pointer;
   text-decoration: none;
   color: black;
-}
-
-.main-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 3rem;
 }
