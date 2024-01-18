@@ -6,6 +6,7 @@ import OrderDetails from "./Pages/OrderDetails";
 import ProductsPage from "./Pages/ProductsPage";
 import ContactPage from "./Pages/ContactPage";
 import AboutPage from "./Pages/AboutPage";
+import SingelProductPage from "./Pages/SingelProductPage";
 import "./styles/App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/confirmation/:orderId" element={<OrderDetails />} />
+        <Route path="/products/:productId" element={<SingelProductPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />

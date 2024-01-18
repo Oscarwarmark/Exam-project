@@ -4,11 +4,11 @@ import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 function ProductsPage() {
   return (
-    <div>
+    <>
       <Header />
       <ProductCard />
       <Footer />
-    </div>
+    </>
   );
 }
 
