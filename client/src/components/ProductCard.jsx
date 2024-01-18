@@ -66,9 +66,9 @@ const ProductCard = () => {
                 <h1>{product.name}</h1>
                 <p>{`${product.default_price.unit_amount / 100} kr`}</p>
 
-                <Button variant="outlined" onClick={() => handleClick(product)}>
+                {/* <Button variant="outlined" onClick={() => handleClick(product)}>
                   lägg till i kundvagn
-                </Button>
+                </Button> */}
               </Link>
             </div>
           ))}
