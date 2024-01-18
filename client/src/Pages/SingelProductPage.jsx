@@ -53,20 +53,26 @@ function SingleProductPage() {
       </div>
       {product ? (
         <div className="SingelProductPage">
-          <div className="Singel-Product-info">
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Price: {product.default_price.unit_amount / 100}kr</p>
+          <div className="Singel-product-container">
+            <div className="Singel-Product-info">
+              <div>
+                <h1>{product.name}</h1>
+                <p>{product.description}</p>
+              </div>
+              <div className="price-add-to-cart-btn">
+                <p> {product.default_price.unit_amount / 100}kr</p>
 
-            <Button variant="outlined" onClick={() => handleClick(product)}>
-              lägg till i kundvagn
-            </Button>
+                <Button variant="outlined" onClick={() => handleClick(product)}>
+                  lägg till i kundvagn
+                </Button>
+              </div>
+            </div>
+            <img
+              className="Singel-Product-img"
+              src={`${product.images}`}
+              alt=""
+            />
           </div>
-          <img
-            className="Singel-Product-img"
-            src={`${product.images}`}
-            alt=""
-          />
         </div>
       ) : (
         <p>Loading...</p>
