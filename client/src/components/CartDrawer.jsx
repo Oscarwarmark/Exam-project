@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
 import "../styles/CartDrawer.css";
 import CartItem from "./CartItem";
 
@@ -32,7 +33,20 @@ function CartDrawer() {
         onClose={() => setIsDrawerOpen(false)}
       >
         <div className="mobile-navigation-container">
-          <h1 className="cart-title">Kundvagn</h1>
+          <div className="cart-title">
+            <h1>Kundvagn</h1>
+            <div className="cart-close-btn">
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="logo"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </div>
+          </div>
           <div>
             <CartItem />
           </div>
