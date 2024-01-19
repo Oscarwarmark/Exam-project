@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import Button from "@mui/material/Button";
 import CartItem from "./CartItem";
+import Footer from "./Footer";
 
 const Cart = () => {
   const { cartItems } = useContext(MyCartContext);
@@ -37,7 +38,7 @@ const Cart = () => {
   }
 
   return (
-    <div>
+    <div id="root">
       <Header />
       <div className="cart-container">
         <h2>Varor i kundvagn</h2>
@@ -65,6 +66,7 @@ const Cart = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

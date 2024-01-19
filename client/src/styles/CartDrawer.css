@@ -18,6 +18,15 @@
 
 .cart-title {
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  min-width: 400px;
+}
+
+.cart-close-btn {
+  position: absolute;
+  margin-left: 25rem;
+  margin-top: 1.3rem;
 }
 
 .cart-drawer-container {
@@ -60,5 +69,10 @@
   }
   .cart-productcard-info {
     margin-right: 5rem;
+  }
+  .cart-close-btn {
+    position: absolute;
+    margin-left: 20rem;
+    margin-top: 1.3rem;
   }
 }
