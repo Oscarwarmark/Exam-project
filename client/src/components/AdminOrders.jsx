@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import "../styles/AdminOrders.css";
+import { Button } from "@mui/material";
 
 function AdminOrders() {
   const { signedInUser } = useContext(UserContext);
@@ -53,10 +54,10 @@ function AdminOrders() {
   return (
     <>
       <div className="admin-orders">
-        <h1>AdminPage</h1>
-        <ul>
+        <h1>Orders</h1>
+        <ul className="orders-container">
           {orders.map((order) => (
-            <li key={order._id}>
+            <li key={order._id} className="Order-items">
               <p>Order Number: {order.orderNumber}</p>
               <p>customer: {order.name}</p>
               <ul>
@@ -73,16 +74,21 @@ function AdminOrders() {
           ))}
         </ul>
         <div>
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          <Button
+            variant="outlined"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
             Previous Page
-          </button>
+          </Button>
           <span>{`Page ${currentPage} of ${totalPages}`}</span>
-          <button
+          <Button
+            variant="outlined"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
             Next Page
-          </button>
+          </Button>
         </div>
       </div>
     </>

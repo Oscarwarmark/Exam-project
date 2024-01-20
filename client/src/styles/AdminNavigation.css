@@ -27,6 +27,8 @@
 }
 
 .admin-name {
-  color: wheat;
+  color: rgb(5, 5, 5);
   position: fixed;
+  display: flex;
+  margin-left: 5rem;
 }

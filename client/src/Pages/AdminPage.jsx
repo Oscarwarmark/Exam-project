@@ -11,9 +11,7 @@ function AdminPage() {
   return (
     <>
       {signedInUser.isAdmin ? (
-        <div className="admin-layout">
-          <AdminNavigation />
-
+        <div>
           <div>
             <AdminOrders />
           </div>

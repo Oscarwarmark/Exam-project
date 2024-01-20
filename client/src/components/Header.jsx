@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import "../Styles/Header.css";
 import MobileNavigation from "./MobileNavigaton";
 import CartDrawer from "./CartDrawer";
+import AdminNavigation from "./AdminNavigation";
 
 const Header = () => {
   const location = useLocation();
@@ -12,7 +13,7 @@ const Header = () => {
 
   if (isAdminPage) {
     // If it's the admin page, don't render the header
-    return null;
+    return <AdminNavigation />;
   }
 
   return (
