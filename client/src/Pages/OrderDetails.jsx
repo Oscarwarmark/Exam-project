@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/OrderDetails.css";
-import Header from "../components/Header";
+
 const OrderDetails = () => {
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
@@ -56,7 +56,6 @@ const OrderDetails = () => {
   // Render your confirmation page with the order details
   return (
     <div>
-      <Header />
       <div className="confirmation-container">
         <h1>Thank you for your order!</h1>
         <h2>Order Confirmation</h2>
