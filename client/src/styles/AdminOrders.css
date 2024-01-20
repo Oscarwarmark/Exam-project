@@ -1,5 +1,48 @@
 .admin-orders {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  padding-bottom: 5rem;
+}
+.admin-orders h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.orders-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 70%;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.Order-items {
+  padding: 5px;
+  border: 1px solid black;
+  width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .Order-items {
+    padding: 5px;
+    border: 1px solid black;
+    width: 90%;
+  }
+  .orders-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
 }
