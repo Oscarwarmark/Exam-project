@@ -8,11 +8,14 @@ import ContactPage from "./Pages/ContactPage";
 import AboutPage from "./Pages/AboutPage";
 import SingelProductPage from "./Pages/SingelProductPage";
 import AdminPage from "./Pages/AdminPage";
+import Header from "./components/Header";
 import "./styles/App.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Home />} />
@@ -24,6 +27,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

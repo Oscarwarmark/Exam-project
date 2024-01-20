@@ -5,9 +5,7 @@ import Footer from "../components/Footer";
 function ContactPage() {
   return (
     <>
-      <Header />
       <p>ContactPage</p>
-      <Footer />
     </>
   );
 }

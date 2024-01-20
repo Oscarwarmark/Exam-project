@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import "../styles/SingelProductPage.css";
 import { Button } from "@mui/material";
 import ProductCard from "../components/ProductCard";
@@ -49,9 +47,7 @@ function SingleProductPage() {
 
   return (
     <div>
-      <div>
-        <Header />
-      </div>
+      <div></div>
       {product ? (
         <div className="SingelProductPage">
           <div className="Singel-product-container">
@@ -83,7 +79,6 @@ function SingleProductPage() {
       ) : (
         <p>Loading...</p>
       )}
-      <Footer />
     </div>
   );
 }

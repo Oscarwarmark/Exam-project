@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const checkoutRoutes = require("./routes/checkout.route");
 const productsRoutes = require("./routes/products.route");
 const customerRoutes = require("./routes/customer.route");
+const orderRoutes = require("./routes/order.route");
 
 const CLIENT_URL = "http://localhost:5173";
 const app = express();
@@ -42,5 +43,6 @@ app.use(express.json());
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/getProducts", productsRoutes);
 app.use("/api/customer", customerRoutes);
+app.use("/api/order", orderRoutes);
 
 app.listen(3000, () => console.log("server is up and running"));

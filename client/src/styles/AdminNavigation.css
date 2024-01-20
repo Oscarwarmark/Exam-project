@@ -1,0 +1,32 @@
+.Admin-navigation {
+  width: 250px;
+  background-color: rgb(26, 25, 40);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-navigation-list {
+  margin-top: 5rem;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 250px;
+}
+
+.admin-navigation-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+}
+
+.admin-navigation-list li:hover {
+  background-color: rgb(51, 56, 64);
+}
+
+.admin-name {
+  color: wheat;
+  position: fixed;
+}

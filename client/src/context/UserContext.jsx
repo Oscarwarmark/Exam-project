@@ -14,10 +14,14 @@ export const UserContext = createContext({
   },
   setIsLoggedIn: () => {},
   isLoggedIn: false,
+  setSignedInUser: () => {},
+  signedInUser: [],
 });
 
 const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [signedInUser, setSignedInUser] = useState([]);
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -32,7 +36,7 @@ const UserProvider = ({ children }) => {
     try {
       const response = await fetch("/api/customer/authorize");
       const data = await response.json();
-      console.log(data);
+      setSignedInUser(data);
 
       // Check if data contains an ID, then update isLoggedIn accordingly
       if (data._id) {
@@ -56,6 +60,8 @@ const UserProvider = ({ children }) => {
         setLogInData,
         setIsLoggedIn,
         isLoggedIn,
+        signedInUser,
+        setSignedInUser,
       }}
     >
       {children}

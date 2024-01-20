@@ -1,8 +1,20 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import "../Styles/Header.css";
 import MobileNavigation from "./MobileNavigaton";
 import CartDrawer from "./CartDrawer";
+
 const Header = () => {
+  const location = useLocation();
+
+  // Check if the current route is the admin page
+  const isAdminPage = location.pathname.startsWith("/admin");
+
+  if (isAdminPage) {
+    // If it's the admin page, don't render the header
+    return null;
+  }
+
   return (
     <div className="header">
       <div className="header-container">
