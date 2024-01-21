@@ -31,4 +31,26 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, getProductById };
+const newProduct = async (req, res) => {
+  const { name, description, price } = req.body;
+
+  try {
+    const product = await stripe.products.create({
+      name,
+      description,
+    });
+
+    const priceObj = await stripe.prices.create({
+      unit_amount: price * 100, // Stripe prices are in cents
+      currency: "usd", // Change to your preferred currency
+      product: product.id,
+    });
+
+    res.json({ productId: product.id, priceId: priceObj.id });
+  } catch (error) {
+    console.error("Error creating product:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+module.exports = { getProducts, getProductById, newProduct };

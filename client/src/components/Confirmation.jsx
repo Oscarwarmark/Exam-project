@@ -37,7 +37,6 @@ function Confirmation() {
 
   return (
     <div>
-      <Header />
       <div>Tack för ditt köp</div>
     </div>
   );
