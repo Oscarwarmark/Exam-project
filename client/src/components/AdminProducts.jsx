@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/AdminProducts.css";
+import { Button, TextField } from "@mui/material";
 
 function AdminProducts() {
   const [productName, setProductName] = useState("");
@@ -33,10 +34,12 @@ function AdminProducts() {
   return (
     <div className="admin-products">
       <h1>Create a New Product</h1>
-      <form>
+      <form className="new-product-form">
         <label>
           Product Name:
-          <input
+          <TextField
+            variant="outlined"
+            label="Name"
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
@@ -45,7 +48,8 @@ function AdminProducts() {
         <br />
         <label>
           Product Description:
-          <input
+          <TextField
+            label="Description"
             type="text"
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
@@ -54,7 +58,8 @@ function AdminProducts() {
         <br />
         <label>
           Product Price:
-          <input
+          <TextField
+            label="123"
             type="number"
             value={productPrice}
             onChange={(e) => setProductPrice(e.target.value)}
@@ -63,16 +68,17 @@ function AdminProducts() {
         <br />
         <label>
           Image URL:
-          <input
+          <TextField
+            label="Image URL:"
             type="text"
             value={productImage}
             onChange={(e) => setProductImage(e.target.value)}
           />
         </label>
         <br />
-        <button type="button" onClick={handleCreateProduct}>
+        <Button variant="outlined" type="button" onClick={handleCreateProduct}>
           Create Product
-        </button>
+        </Button>
       </form>
     </div>
   );
