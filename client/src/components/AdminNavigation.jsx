@@ -12,7 +12,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -88,7 +87,7 @@ function AdminNavigation(props) {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#ffffff",
+        main: "#4372AB",
       },
     },
   });
