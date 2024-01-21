@@ -13,7 +13,7 @@ function SingleProductPage() {
   useEffect(() => {
     // Fetch the product by ID from your backend
     console.log(product);
-    fetch(`/api/getProducts/${productId}`)
+    fetch(`/api/products/${productId}`)
       .then((response) => response.json())
       .then((data) => {
         setProduct(data);

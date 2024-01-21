@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/AdminNavigation.css";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 // mui
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -49,32 +50,36 @@ function AdminNavigation(props) {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Orders"} />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Products"} />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Users"} />
-          </ListItemButton>
-        </ListItem>
+        <NavLink to="/admin/orders">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Orders"} />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/admin/products">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Products"} />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/admin/users">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Users"} />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
       </List>
       <Divider />
     </div>
@@ -92,7 +97,25 @@ function AdminNavigation(props) {
     <Box sx={{ display: "flex" }}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-
+        <AppBar
+          position="fixed"
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Admin
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Box
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

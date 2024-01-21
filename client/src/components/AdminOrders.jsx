@@ -54,7 +54,6 @@ function AdminOrders() {
   return (
     <>
       <div className="admin-orders">
-        <h1>Orders</h1>
         <ul className="orders-container">
           {orders.map((order) => (
             <li key={order._id} className="Order-items">

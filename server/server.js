@@ -41,7 +41,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/checkout", checkoutRoutes);
-app.use("/api/getProducts", productsRoutes);
+app.use("/api/products", productsRoutes);
 app.use("/api/customer", customerRoutes);
 app.use("/api/order", orderRoutes);
 

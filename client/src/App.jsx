@@ -11,6 +11,8 @@ import AdminPage from "./Pages/AdminPage";
 import Header from "./components/Header";
 import "./styles/App.css";
 import Footer from "./components/Footer";
+import AdminOrders from "./components/AdminOrders";
+import AdminProducts from "./components/AdminProducts";
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/products" element={<AdminProducts />} />
       </Routes>
       <Footer />
     </BrowserRouter>

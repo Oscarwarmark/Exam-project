@@ -10,7 +10,7 @@ const ProductCard = () => {
   useEffect(() => {
     async function ListOfProducts() {
       try {
-        const response = await fetch("/api/getProducts", {
+        const response = await fetch("/api/products", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
