@@ -14,6 +14,51 @@ const createCheckoutSession = async (req, res) => {
           quantity: item.quantity,
         };
       }),
+      shipping_address_collection: {
+        allowed_countries: ["SE"],
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 0,
+              currency: "sek",
+            },
+            display_name: "Gratis leverans",
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 3,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 5,
+              },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 29900,
+              currency: "sek",
+            },
+            display_name: "Express leverans",
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 1,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 1,
+              },
+            },
+          },
+        },
+      ],
       customer: req.session.id,
       mode: "payment",
       allow_promotion_codes: true,
@@ -46,7 +91,6 @@ const verifyStripeSession = async (req, res) => {
     // Retrieve product information for each line item
     const productPromises = lineItems.data.map(async (item) => {
       const product = await stripe.products.retrieve(item.price.product);
-      console.log("hej", product);
       return {
         totalPrice: item.amount_total / 100,
         discount: item.amount_discount,
@@ -63,7 +107,22 @@ const verifyStripeSession = async (req, res) => {
     console.log("line_items", lineItems);
 
     console.log("products", products);
-    console.log("session", session.customer_details.name);
+    console.log("session", session.shipping_details);
+
+    // Extracting shipping details from the session
+    const shippingDetails = {
+      name: session.shipping_details.name,
+      address: {
+        line1: session.shipping_details.address.line1,
+        line2: session.shipping_details.address.line2,
+        city: session.shipping_details.address.city,
+        postalCode: session.shipping_details.address.postal_code,
+        country: session.shipping_details.address.country,
+      },
+    };
+
+    console.log("shippingDetails", shippingDetails);
+
     // Create a new order instance using the OrderModel
     const order = new OrderModel({
       customer: req.session._id,
@@ -71,8 +130,10 @@ const verifyStripeSession = async (req, res) => {
       name: session.customer_details.name,
       totalOrderPrice: session.amount_total / 100,
       orderItems: products,
+      shippingDetails: shippingDetails,
     });
 
+    console.log("order", order);
     // Save the order to MongoDB
     await order.save();
 
@@ -80,6 +141,9 @@ const verifyStripeSession = async (req, res) => {
     res.status(200).json({ verified: true, orderId: order._id });
   } catch (error) {
     console.error("Error in verifyStripeSession:", error.message);
+    if (error.details) {
+      console.error("Validation error details:", error.details);
+    }
     // Send error response to the client
     res.status(500).json({ verified: false, error: "Internal Server Error" });
   }

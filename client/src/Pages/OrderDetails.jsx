@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/OrderDetails.css";
+import Button from "@mui/material/Button";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -57,23 +59,40 @@ const OrderDetails = () => {
   return (
     <div>
       <div className="confirmation-container">
-        <h1>Thank you for your order!</h1>
-        <h2>Order Confirmation</h2>
-        <p>Order Number: {order.orderNumber}</p>
-        <h2>Products</h2>
-        <div>
-          {order.orderItems.map((product, i) => (
-            <div className="order-products">
-              <p>{product.quantity} st</p>
-              <p>{product.productName}:</p>
-              <p>{`${product.unitPrice} kr`}</p>
-            </div>
-          ))}
+        <div className="order-product-container">
+          <div>
+            <h2>Produkter</h2>
+            {order.orderItems.map((product, i) => (
+              <div className="order-products">
+                <p>{product.quantity} st</p>
+                <p>{product.productName}:</p>
+                <p>{`${product.unitPrice} kr`}</p>
+              </div>
+            ))}
+          </div>
+          <Button variant="outlined" onClick={navigateToHome}>
+            Fortsätt handla
+          </Button>
         </div>
-
-        <p>Order total: {order.totalOrderPrice}kr</p>
-        {/* Display other order details as needed */}
-        <button onClick={navigateToHome}>Go to Home</button>
+        <div className="order-info">
+          <div id="order-thanks">
+            <CheckCircleOutlineIcon fontSize="large" />
+            <h1>Tack för din order {order.name}!</h1>
+          </div>
+          <p>Order #{order.orderNumber}</p>
+          <div className="address-container">
+            <h3>Address</h3>
+            <p>
+              <p>Namn: {order.shippingDetails.name}</p>
+              stad: {order.shippingDetails.address.city},
+              {order.shippingDetails.address.postalCode}
+            </p>
+            s{" "}
+          </div>
+          <div>
+            <p>Order total: {order.totalOrderPrice}kr</p>
+          </div>
+        </div>
       </div>
     </div>
   );
