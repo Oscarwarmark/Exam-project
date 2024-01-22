@@ -3,10 +3,14 @@ const Joi = require("joi");
 
 const AddressSchema = new Schema(
   {
-    street: { type: String, required: true },
-    zipcode: { type: String, required: true },
-    city: { type: String, required: true },
-    country: { type: String, required: true },
+    name: { type: String, required: true },
+    address: {
+      line1: { type: String, required: true },
+      line2: { type: String },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
+    },
   },
   { _id: false }
 );
@@ -28,13 +32,7 @@ const OrderSchema = new Schema(
     orderItems: { type: [OrderItemSchema], required: true },
     totalOrderPrice: { type: Number, required: true },
     name: { type: String, required: true },
-    // deliveryAddress: { type: AddressSchema, required: true },
-    // shipped: { type: Boolean, required: false, default: false },
-    // shippingMethod: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "shippingMethod",
-    //   required: true,
-    // },
+    shippingDetails: { type: AddressSchema, required: true },
   },
   {
     timestamps: true,
@@ -54,15 +52,15 @@ const OrderCreateValidationSchema = Joi.object({
     )
     .strict()
     .required(),
-  // deliveryAddress: Joi.object({
-  //   street: Joi.string().strict().required(),
-  //   zipcode: Joi.string().strict().required(),
-  //   city: Joi.string().strict().required(),
-  //   country: Joi.string().strict().required(),
-  // })
-  //   .strict()
-  //   .required(),
-  // shippingMethod: Joi.string().strict().required(),
+  shippingDetails: Joi.object({
+    line1: Joi.string().strict().required(),
+    line2: Joi.string(),
+    city: Joi.string().strict().required(),
+    postalCode: Joi.string().strict().required(),
+    country: Joi.string().strict().required(),
+  })
+    .strict()
+    .required(),
 });
 
 const OrderUpdateValidationSchema = OrderCreateValidationSchema.keys({
@@ -71,6 +69,6 @@ const OrderUpdateValidationSchema = OrderCreateValidationSchema.keys({
 
 module.exports = {
   OrderModel,
-  // OrderCreateValidationSchema,
-  // OrderUpdateValidationSchema,
+  OrderCreateValidationSchema,
+  OrderUpdateValidationSchema,
 };

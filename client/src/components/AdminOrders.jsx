@@ -67,6 +67,17 @@ function AdminOrders() {
                   </li>
                 ))}
               </ul>
+              {order.shippingDetails ? (
+                <div>
+                  <p>
+                    Shipping Address: {order.shippingDetails.address.line1},{" "}
+                    {order.shippingDetails.address.city}{" "}
+                    {order.shippingDetails.address.postalCode}
+                  </p>
+                </div>
+              ) : (
+                <p>No shipping details available for this order</p>
+              )}
               <p>Total Price: {order.totalOrderPrice}</p>
               <p>order placed: {formatDate(order.updatedAt)}</p>
             </li>
