@@ -4,8 +4,7 @@ import Button from "@mui/material/Button";
 import "../styles/ProductCard.css";
 import { Link } from "react-router-dom";
 const ProductCard = () => {
-  const { products, setProducts, cartItems, setCartItems } =
-    useContext(MyCartContext);
+  const { products, setProducts } = useContext(MyCartContext);
 
   useEffect(() => {
     async function ListOfProducts() {
@@ -24,7 +23,6 @@ const ProductCard = () => {
 
         const productsData = await response.json();
         setProducts(productsData);
-        console.log(productsData);
       } catch (error) {
         console.error("Error retrieving products:", error);
       }
@@ -32,28 +30,6 @@ const ProductCard = () => {
 
     ListOfProducts();
   }, []);
-
-  const handleClick = (product) => {
-    // Check if the product is already in the cart
-    const existingCartItem = cartItems.find(
-      (item) => item.product.id === product.id
-    );
-
-    if (existingCartItem) {
-      // If it exists, update the quantity
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.product.id === product.id) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      });
-
-      setCartItems(updatedCartItems);
-    } else {
-      // If it doesn't exist, add a new entry with quantity 1
-      setCartItems([...cartItems, { product: product, quantity: 1 }]);
-    }
-  };
 
   return (
     <div>
@@ -65,10 +41,6 @@ const ProductCard = () => {
                 <img src={`${product.images}`} alt="" />
                 <h1>{product.name}</h1>
                 <p>{`${product.default_price.unit_amount / 100} kr`}</p>
-
-                {/* <Button variant="outlined" onClick={() => handleClick(product)}>
-                  lägg till i kundvagn
-                </Button> */}
               </Link>
             </div>
           ))}
