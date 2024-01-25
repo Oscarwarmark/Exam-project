@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-container">
-        <div className="left-contatiner">
+        <div className="left-container">
           <MobileNavigation />
         </div>
         <NavLink to="/" className="title">

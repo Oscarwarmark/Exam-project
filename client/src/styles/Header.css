@@ -1,7 +1,11 @@
 .header {
   display: flex;
   flex-direction: column;
+  position: relative;
+  width: 100%;
+  z-index: 300;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  background-color: rgb(255, 255, 255);
 }
 
 .header-container {
@@ -58,7 +62,7 @@
   height: 1.1rem;
 }
 
-.left-contatiner {
+.left-container {
   width: 180px;
 }
 
@@ -81,7 +85,7 @@
   }
   .header-container {
   }
-  .left-contatiner {
+  .left-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +93,7 @@
 }
 
 @media (min-width: 800px) {
-  .left-contatiner button {
+  .left-container button {
     display: flex;
     align-items: center;
     display: none;
