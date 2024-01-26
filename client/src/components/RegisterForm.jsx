@@ -1,6 +1,7 @@
 import { UserContext } from "../context/UserContext";
 import { useContext, useState } from "react";
-
+import { TextField } from "@mui/material";
+import { Button } from "@mui/material";
 const RegisterForm = () => {
   const [isRegisterd, setIsRegisterd] = useState(false);
   const { userData, setUserData } = useContext(UserContext);
@@ -39,25 +40,40 @@ const RegisterForm = () => {
         <div>
           <p>Eller registrera dig nedan</p>
           <form className="form-container" onSubmit={handleSubmit}>
-            <input
-              placeholder="namn"
-              type="text"
+            <TextField
               name="name"
+              type="password"
+              margin="dense"
+              label="Namn"
+              fullWidth
+              variant="standard"
               onChange={handleChange}
             />
-            <input
-              placeholder="Email"
-              type="text"
+            <TextField
               name="email"
-              onChange={handleChange}
-            />
-            <input
-              placeholder="lösenord"
               type="text"
-              name="password"
+              margin="dense"
+              label="Email"
+              fullWidth
+              variant="standard"
               onChange={handleChange}
             />
-            <button type="submit">register</button>
+            <TextField
+              name="password"
+              type="text"
+              margin="dense"
+              label="Lösenord"
+              fullWidth
+              variant="standard"
+              onChange={handleChange}
+            />
+            <Button
+              style={{ borderColor: "black", color: "black", width: "100%" }}
+              variant="outlined"
+              type="submit"
+            >
+              register
+            </Button>
           </form>
         </div>
       )}

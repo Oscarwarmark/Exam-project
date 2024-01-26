@@ -8,7 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import LoginIcon from "@mui/icons-material/Login";
-
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import { Zoom } from "@mui/material";
 const SignIn = () => {
   const [open, setOpen] = useState(false);
   const { logInData, setLogInData, isLoggedIn, setIsLoggedIn } =
@@ -63,12 +64,35 @@ const SignIn = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <Button variant="outlined" onClick={logOut}>
-          Logga ut
-        </Button>
+        <div>
+          <Zoom
+            in={isLoggedIn}
+            style={{ transitionDelay: isLoggedIn ? "200ms" : "0ms" }}
+          >
+            <CheckCircleOutlineOutlinedIcon
+              style={{ fontSize: "100px", width: "100%" }}
+            ></CheckCircleOutlineOutlinedIcon>
+          </Zoom>
+          <h2
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            Inloggad
+          </h2>
+          <Button
+            style={{ borderColor: "black", color: "black", width: "100%" }}
+            variant="outlined"
+            onClick={logOut}
+          >
+            Logga ut
+          </Button>
+        </div>
       ) : (
         <>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button
+            style={{ borderColor: "black", color: "black", width: "100%" }}
+            variant="outlined"
+            onClick={handleClickOpen}
+          >
             Logga in
           </Button>
         </>
