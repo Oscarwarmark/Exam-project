@@ -37,31 +37,43 @@ const Cart = () => {
 
   return (
     <div id="root">
-      <div className="cart-container">
-        <h2>Varor i kundvagn</h2>
-        <CartItem />
+      <div className="cart-wrapper">
+        <h1>Kundvagn</h1>
+        <div className="cart-container">
+          <div className="cart-product-container">
+            <CartItem />
+          </div>
 
-        {isLoggedIn ? (
-          <div>
-            <SignIn />
-            <Button variant="outlined" onClick={HandelPayment}>
-              Gå till betalning
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <div>
-              <p>Du måste vara inloggad för att handla</p>
+          {isLoggedIn ? (
+            <div className="cart-register-container">
               <SignIn />
+              <Button
+                style={{ width: "100%", marginTop: "2rem" }}
+                variant="outlined"
+                onClick={HandelPayment}
+              >
+                Gå till betalning
+              </Button>
             </div>
-            <div>
-              <RegisterForm />
+          ) : (
+            <div className="cart-register-container">
+              <div>
+                <p>Logga in för att gå till betalning</p>
+                <SignIn />
+              </div>
+              <div>
+                <RegisterForm />
+              </div>
+              <Button
+                style={{ width: "100%", marginTop: "2rem" }}
+                variant="outlined"
+                disabled
+              >
+                Gå till betalning
+              </Button>
             </div>
-            <Button variant="outlined" disabled>
-              Gå till betalning
-            </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

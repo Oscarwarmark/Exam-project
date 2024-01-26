@@ -26,8 +26,6 @@ a {
   background-image: url(https://i.imgur.com/h8CRi8K.jpg);
   background-size: cover;
   background-position: bottom;
-
-  /*  this is where the magic happens:  */
   background-attachment: fixed;
 }
 
@@ -35,6 +33,16 @@ a {
   background-image: url(https://i.imgur.com/rI6liuX.jpg);
   background-attachment: fixed;
   height: 1200px;
+}
+.blank,
+.other {
+  width: 100%;
+  min-height: 60vh;
+  background-color: var(--color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .item {
@@ -47,6 +55,12 @@ a {
   -webkit-box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
   -moz-box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
   box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
+  opacity: 1;
+}
+.item:hover {
+  opacity: 0.9;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .home-imges {

@@ -28,16 +28,16 @@ function MobileNavigation() {
         <div className="mobile-navigation-container">
           <h1>Oscars Webbshop</h1>
           <ul className="mobile-navlinks">
-            <li>
+            <li onClick={() => setIsDrawerOpen(false)}>
               <NavLink to="/">Hem</NavLink>
             </li>
-            <li>
+            <li onClick={() => setIsDrawerOpen(false)}>
               <NavLink to="/Products">Produkter</NavLink>
             </li>
-            <li>
+            <li onClick={() => setIsDrawerOpen(false)}>
               <NavLink to="/about">Om Oss</NavLink>
             </li>
-            <li>
+            <li onClick={() => setIsDrawerOpen(false)}>
               <NavLink to="/contact">Kontakt</NavLink>
             </li>
           </ul>

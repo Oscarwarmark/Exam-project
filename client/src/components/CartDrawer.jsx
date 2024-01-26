@@ -56,6 +56,7 @@ function CartDrawer() {
               <Button
                 variant="outlined"
                 style={{ borderColor: "black", color: "black" }}
+                onClick={() => setIsDrawerOpen(false)}
               >
                 Gå till kassan
               </Button>
