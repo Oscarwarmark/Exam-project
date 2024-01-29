@@ -10,10 +10,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import LoginIcon from "@mui/icons-material/Login";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import { Zoom } from "@mui/material";
+
 const SignIn = () => {
   const [open, setOpen] = useState(false);
   const { logInData, setLogInData, isLoggedIn, setIsLoggedIn } =
     useContext(UserContext);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,23 +30,46 @@ const SignIn = () => {
 
   const handleClose = () => {
     setOpen(false);
+    // Clear any previous errors when the dialog is closed
+    setErrors({});
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!logInData.email) {
+      newErrors.email = "Please enter your email";
+    } else if (!/\S+@\S+\.\S+/.test(logInData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!logInData.password) {
+      newErrors.password = "Please enter your password";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/customer/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(logInData),
-    });
 
-    if (!response.ok) {
-      throw new Error("wrong password ");
-    } else {
-      setIsLoggedIn(true);
-      handleClose();
+    if (validateForm()) {
+      const response = await fetch("/api/customer/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(logInData),
+      });
+
+      if (!response.ok) {
+        setErrors({ password: "Wrong password" });
+        throw new Error("Wrong password");
+      } else {
+        setIsLoggedIn(true);
+        handleClose();
+      }
     }
   };
 
@@ -110,6 +135,8 @@ const SignIn = () => {
               fullWidth
               variant="standard"
               onChange={handleChange}
+              error={!!errors.email}
+              helperText={errors.email}
             />
             <TextField
               margin="dense"
@@ -119,6 +146,8 @@ const SignIn = () => {
               fullWidth
               variant="standard"
               onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
             />
           </DialogContent>
           <DialogActions>
