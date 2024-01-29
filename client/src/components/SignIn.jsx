@@ -44,7 +44,6 @@ const SignIn = () => {
       throw new Error("wrong password ");
     } else {
       setIsLoggedIn(true);
-      console.log(isLoggedIn);
       handleClose();
     }
   };

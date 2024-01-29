@@ -51,6 +51,10 @@ const UserProvider = ({ children }) => {
     auth();
   }, []);
 
+  useEffect(() => {
+    auth();
+  }, [isLoggedIn]);
+
   return (
     <UserContext.Provider
       value={{

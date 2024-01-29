@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import "../styles/AdminOrders.css";
 import { Button } from "@mui/material";
+import SignIn from "./SignIn";
 
 function AdminOrders() {
   const { signedInUser } = useContext(UserContext);
@@ -16,7 +17,6 @@ function AdminOrders() {
       try {
         const response = await fetch(`/api/order/orders?page=${currentPage}`);
         const data = await response.json();
-        console.log(data);
         setOrders(data.orders);
         setTotalPages(data.totalPages);
       } catch (error) {
@@ -53,54 +53,63 @@ function AdminOrders() {
 
   return (
     <>
-      <div className="admin-orders">
-        <ul className="orders-container">
-          {orders.map((order) => (
-            <li key={order._id} className="Order-items">
-              <p>Order Number: {order.orderNumber}</p>
-              <p>customer: {order.name}</p>
-              <ul>
-                {order.orderItems.map((item) => (
-                  <li key={item._id}>
-                    <p>Product Name: {item.productName}</p>
-                    <p>Quantity: {item.quantity}</p>
-                  </li>
-                ))}
-              </ul>
-              {order.shippingDetails ? (
-                <div>
-                  <p>
-                    Shipping Address: {order.shippingDetails.address.line1},{" "}
-                    {order.shippingDetails.address.city}{" "}
-                    {order.shippingDetails.address.postalCode}
-                  </p>
-                </div>
-              ) : (
-                <p>No shipping details available for this order</p>
-              )}
-              <p>Total Price: {order.totalOrderPrice}</p>
-              <p>order placed: {formatDate(order.updatedAt)}</p>
-            </li>
-          ))}
-        </ul>
-        <div>
-          <Button
-            variant="outlined"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            Previous Page
-          </Button>
-          <span>{`Page ${currentPage} of ${totalPages}`}</span>
-          <Button
-            variant="outlined"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next Page
-          </Button>
+      {signedInUser.isAdmin ? (
+        <div className="admin-orders">
+          <ul className="orders-container">
+            {orders.map((order) => (
+              <li key={order._id} className="Order-items">
+                <p>Order Number: {order.orderNumber}</p>
+                <p>customer: {order.name}</p>
+                <ul>
+                  {order.orderItems.map((item, index) => (
+                    <li key={`${order._id}-${index}`}>
+                      <p>Product Name: {item.productName}</p>
+                      <p>Quantity: {item.quantity}</p>
+                    </li>
+                  ))}
+                </ul>
+                {order.shippingDetails ? (
+                  <div>
+                    <p>
+                      Shipping Address: {order.shippingDetails.address.line1},{" "}
+                      {order.shippingDetails.address.city}{" "}
+                      {order.shippingDetails.address.postalCode}
+                    </p>
+                  </div>
+                ) : (
+                  <p>No shipping details available for this order</p>
+                )}
+                <p>Total Price: {order.totalOrderPrice}</p>
+                <p>order placed: {formatDate(order.updatedAt)}</p>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <Button
+              variant="outlined"
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
+              Previous Page
+            </Button>
+            <span>{`Page ${currentPage} of ${totalPages}`}</span>
+            <Button
+              variant="outlined"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next Page
+            </Button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="admin-signin">
+            <h1>Logga in</h1>
+            <SignIn />
+          </div>
+        </>
+      )}
     </>
   );
 }

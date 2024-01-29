@@ -21,6 +21,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import SignIn from "./SignIn";
 
 const drawerWidth = 240;
 
@@ -45,42 +46,53 @@ function AdminNavigation(props) {
   };
 
   const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        <NavLink to="/admin/orders">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Orders"} />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-        <NavLink to="/admin/products">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Products"} />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-        <NavLink to="/admin/users">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Users"} />
-            </ListItemButton>
-          </ListItem>
-        </NavLink>
-      </List>
-      <Divider />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+        height: "99%",
+      }}
+    >
+      <div>
+        <Toolbar />
+        <Divider />
+        <List>
+          <NavLink to="/admin/orders">
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Orders"} />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
+          <NavLink to="/admin/products">
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Products"} />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
+          <NavLink to="/admin/users">
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Users"} />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
+        </List>
+
+        <Divider />
+      </div>
+      <SignIn />
     </div>
   );
 
@@ -120,7 +132,6 @@ function AdminNavigation(props) {
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Drawer
             variant="temporary"
             open={mobileOpen}

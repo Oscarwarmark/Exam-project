@@ -49,15 +49,7 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="blank">
-          {products.map((product, i) => (
-            <Link key={i} to={`/Products/${product.id}`}>
-              <div className="item">
-                <img className="home-imges" src={`${product.images}`} alt="" />
-              </div>
-            </Link>
-          ))}
-        </div>
+        <div className="blank"></div>
 
         <div className="container second">
           {products.map((product, i) => (

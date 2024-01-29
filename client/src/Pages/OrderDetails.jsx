@@ -57,7 +57,7 @@ const OrderDetails = () => {
 
   // Render your confirmation page with the order details
   return (
-    <div>
+    <div className="order-wrapper">
       <div className="confirmation-container">
         <div className="order-product-container">
           <div>
@@ -87,10 +87,11 @@ const OrderDetails = () => {
               stad: {order.shippingDetails.address.city},
               {order.shippingDetails.address.postalCode}
             </p>
-            s{" "}
           </div>
           <div>
-            <p>Order total: {order.totalOrderPrice}kr</p>
+            <p style={{ margin: "0px" }}>
+              Order total: {order.totalOrderPrice}kr
+            </p>
           </div>
         </div>
       </div>

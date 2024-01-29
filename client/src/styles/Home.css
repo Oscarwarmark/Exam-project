@@ -34,16 +34,16 @@ a {
   background-attachment: fixed;
   height: 1200px;
 }
-.blank,
+/* .blank,
 .other {
   width: 100%;
-  min-height: 60vh;
+  min-height: 20vh;
   background-color: var(--color);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-}
+} */
 
 .item {
   display: flex;
