@@ -1,18 +1,20 @@
-import { IconButton } from "@mui/material";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../styles/Footer.css";
+
+// mui
+import { IconButton } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
+// Only renders on pages that dont start with "/admin"
+
 function Footer() {
   const location = useLocation();
 
-  // Check if the current route is the admin page
   const isAdminPage = location.pathname.startsWith("/admin");
 
   if (isAdminPage) {
-    // If it's the admin page, don't render the header
     return null;
   }
   return (

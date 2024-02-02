@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
-import Confirmation from "./components/confirmation";
+import Confirmation from "./components/Confirmation";
 import Cart from "./components/Cart";
 import OrderDetails from "./Pages/OrderDetails";
 import ProductsPage from "./Pages/ProductsPage";

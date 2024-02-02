@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
+
+// mui
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,7 +9,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import LoginIcon from "@mui/icons-material/Login";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import { Zoom } from "@mui/material";
 
@@ -30,7 +31,6 @@ const SignIn = () => {
 
   const handleClose = () => {
     setOpen(false);
-    // Clear any previous errors when the dialog is closed
     setErrors({});
   };
 

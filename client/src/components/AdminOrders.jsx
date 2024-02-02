@@ -24,7 +24,7 @@ function AdminOrders() {
       }
     };
 
-    // Check if the user is an admin before fetching orders
+    // Checking if the user is an admin before fetching orders
     if (signedInUser.isAdmin) {
       fetchOrders();
     }
@@ -38,7 +38,7 @@ function AdminOrders() {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  // Function to format date to dd/mm/yy
+  // Function to format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {

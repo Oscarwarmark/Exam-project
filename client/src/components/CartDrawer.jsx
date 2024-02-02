@@ -1,13 +1,14 @@
+import React, { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { MyCartContext } from "../context/CartContext";
+import CartItem from "./CartItem";
+import "../styles/CartDrawer.css";
+
+// mui
 import { Drawer, IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { MyCartContext } from "../context/CartContext";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import "../styles/CartDrawer.css";
-import CartItem from "./CartItem";
 
 function CartDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

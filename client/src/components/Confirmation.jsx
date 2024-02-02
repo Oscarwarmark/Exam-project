@@ -1,8 +1,10 @@
 import { useState, useContext, useEffect } from "react";
-import Header from "./Header";
 import { MyCartContext } from "../context/CartContext";
+import { CircularProgress } from "@mui/material";
+
 const CLIENT_URL = "http://localhost:5173";
 
+// handeling and verifying the order before sending the customer to the order confirmation page
 function Confirmation() {
   const { setCartItems } = useContext(MyCartContext);
   const [isPaymentVerified, setIsPaymentVerified] = useState();
@@ -36,8 +38,9 @@ function Confirmation() {
   }, []);
 
   return (
-    <div>
-      <div>Tack för ditt köp</div>
+    <div className="handle-order">
+      <h1>Hanterar order</h1>
+      <CircularProgress />
     </div>
   );
 }

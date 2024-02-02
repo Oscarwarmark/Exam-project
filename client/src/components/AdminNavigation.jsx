@@ -1,10 +1,8 @@
 import React from "react";
 import "../styles/AdminNavigation.css";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-// mui
+// mui components
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -26,7 +24,6 @@ import SignIn from "./SignIn";
 const drawerWidth = 240;
 
 function AdminNavigation(props) {
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 

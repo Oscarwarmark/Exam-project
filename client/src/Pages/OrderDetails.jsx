@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/OrderDetails.css";
+
+// mui
 import Button from "@mui/material/Button";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
@@ -26,7 +28,6 @@ const OrderDetails = () => {
         setOrder(order);
       } catch (error) {
         console.error("Error fetching order:", error.message);
-        // Handle error, show user-friendly message, etc.
       } finally {
         setLoading(false);
       }
@@ -40,7 +41,6 @@ const OrderDetails = () => {
   };
 
   if (loading) {
-    // Loading state
     return <div>Loading...</div>;
   }
 
@@ -55,7 +55,6 @@ const OrderDetails = () => {
     );
   }
 
-  // Render your confirmation page with the order details
   return (
     <div className="order-wrapper">
       <div className="confirmation-container">
@@ -84,6 +83,7 @@ const OrderDetails = () => {
             <h3>Address</h3>
             <p>
               <p>Namn: {order.shippingDetails.name}</p>
+              <p>Gatuadress: {order.shippingDetails.address.line1}</p>
               stad: {order.shippingDetails.address.city},
               {order.shippingDetails.address.postalCode}
             </p>

@@ -1,20 +1,22 @@
 import React from "react";
 import { useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
-import { Button } from "@mui/material";
+
+// Mui
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import { IconButton } from "@mui/material";
+
 function CartItem() {
   const { cartItems, decreaseQuantity, increaseQuantity, calculateTotalPrice } =
     useContext(MyCartContext);
 
   const handleDecreaseQuantity = (productId) => {
-    decreaseQuantity(cartItems, productId); // Call the decreaseQuantity function from context with the cartItems and product ID
+    decreaseQuantity(cartItems, productId);
   };
 
   const handleIncreaseQuantity = (productId) => {
-    increaseQuantity(cartItems, productId); // Call the increaseQuantity function from context with the cartItems and product ID
+    increaseQuantity(cartItems, productId);
   };
 
   const totalPrice = calculateTotalPrice(cartItems);

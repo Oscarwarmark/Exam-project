@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { MyCartContext } from "../context/CartContext";
 import { useParams } from "react-router-dom";
+import ProductCard from "../components/ProductCard";
 import "../styles/SingelProductPage.css";
 import { Button } from "@mui/material";
-import ProductCard from "../components/ProductCard";
+
 function SingleProductPage() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -11,7 +12,7 @@ function SingleProductPage() {
   const { cartItems, setCartItems } = useContext(MyCartContext);
 
   useEffect(() => {
-    // Fetch the product by ID from your backend
+    // Fetch the product by ID from backend
     fetch(`/api/products/${productId}`)
       .then((response) => response.json())
       .then((data) => {

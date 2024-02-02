@@ -9,9 +9,7 @@ function AdminPage() {
   return (
     <div className="admin-wrapper">
       {signedInUser.isAdmin ? (
-        <div>
-          <div></div>
-        </div>
+        <div></div>
       ) : (
         <>
           <h1>Logga in</h1>

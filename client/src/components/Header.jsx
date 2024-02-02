@@ -5,14 +5,14 @@ import MobileNavigation from "./MobileNavigaton";
 import CartDrawer from "./CartDrawer";
 import AdminNavigation from "./AdminNavigation";
 
+// Only renders on pages that dont start with "/admin"
+
 const Header = () => {
   const location = useLocation();
 
-  // Check if the current route is the admin page
   const isAdminPage = location.pathname.startsWith("/admin");
 
   if (isAdminPage) {
-    // If it's the admin page, don't render the header
     return <AdminNavigation />;
   }
 
@@ -38,7 +38,7 @@ const Header = () => {
             <NavLink to="/Products">Produkter</NavLink>
           </li>
           <li>
-            <NavLink to="/about">Om Oss</NavLink>
+            <NavLink to="/about">Om </NavLink>
           </li>
           <li>
             <NavLink to="/contact">Kontakt</NavLink>

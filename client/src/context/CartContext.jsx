@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export const MyCartContext = createContext({
@@ -13,14 +13,13 @@ export const MyCartContext = createContext({
 });
 
 const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useLocalStorage("cart", []); // cart array
+  const [cartItems, setCartItems] = useLocalStorage("cart", []);
   const [products, setProducts] = useState([]);
   const [cartQuantity, setCartQuantity] = useState([]);
 
   const calculateTotalQuantity = (productArray) => {
     let totalQuantity = 0;
 
-    // Iterate through the array and sum up the quantities
     productArray.forEach((item) => {
       totalQuantity += item.quantity;
     });
@@ -28,7 +27,6 @@ const CartProvider = ({ children }) => {
     return totalQuantity;
   };
 
-  // Calculate the total quantity
   const total = calculateTotalQuantity(cartItems);
 
   useEffect(() => {
@@ -64,7 +62,7 @@ const CartProvider = ({ children }) => {
 
     const filteredCart = updatedCart.filter((item) => item.quantity > 0); // Remove items with quantity 0
 
-    setCartItems(filteredCart); // Update the cart items in the context
+    setCartItems(filteredCart);
     return filteredCart;
   }
 

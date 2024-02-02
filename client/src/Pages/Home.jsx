@@ -1,11 +1,9 @@
-import Header from "../components/Header";
-import "../Styles/home.css";
-import ProductCard from "../components/ProductCard";
-import Footer from "../components/Footer";
 import { useContext, useEffect } from "react";
 import { MyCartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import "../Styles/home.css";
 import { Button } from "@mui/material";
+
 const Home = () => {
   const { products, setProducts } = useContext(MyCartContext);
 
@@ -48,9 +46,7 @@ const Home = () => {
             </Button>
           </Link>
         </div>
-
         <div className="blank"></div>
-
         <div className="container second">
           {products.map((product, i) => (
             <Link key={i} to={`/Products/${product.id}`}>

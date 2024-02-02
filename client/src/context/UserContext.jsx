@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext({
   setUserData: () => {},
@@ -32,6 +32,7 @@ const UserProvider = ({ children }) => {
     password: "",
   });
 
+  // Checks if a user is signed in
   const auth = async () => {
     try {
       const response = await fetch("/api/customer/authorize");
@@ -44,7 +45,6 @@ const UserProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Authentication error:", error);
-      // Handle authentication error if needed
     }
   };
   useEffect(() => {

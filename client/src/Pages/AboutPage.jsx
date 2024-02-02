@@ -1,7 +1,5 @@
 import React from "react";
 import "../styles/About.css";
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const AboutPage = () => {
   return (
