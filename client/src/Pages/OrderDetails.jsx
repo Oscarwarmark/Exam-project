@@ -24,7 +24,6 @@ const OrderDetails = () => {
         }
 
         const { order } = await response.json();
-        console.log(order);
         setOrder(order);
       } catch (error) {
         console.error("Error fetching order:", error.message);
