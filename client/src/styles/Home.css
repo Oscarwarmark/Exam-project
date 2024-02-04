@@ -19,9 +19,10 @@ a {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
   flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
   background-image: url(https://i.imgur.com/h8CRi8K.jpg);
   background-size: cover;
@@ -46,8 +47,9 @@ a {
 } */
 
 .item {
+  margin-top: 2rem;
   display: flex;
-  max-width: 320px;
+  width: 320px;
   background-color: white;
   flex-direction: column;
   align-items: center;

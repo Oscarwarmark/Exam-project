@@ -31,7 +31,6 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     setCartQuantity(total);
-    console.log(cartItems);
   }, [cartItems]);
 
   function increaseQuantity(cart, productId) {
