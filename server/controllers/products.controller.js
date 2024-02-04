@@ -1,18 +1,14 @@
 const { initStripe } = require("../stripe");
 const stripe = initStripe();
 
-const CLIENT_URL = "http://localhost:5173";
-
 const getProductById = async (req, res) => {
   const productId = req.params.productId;
   try {
-    // Retrieve the product from Stripe using its ID
     const product = await stripe.products.retrieve(productId, {
       expand: ["default_price"],
     });
     res.status(200).json(product);
   } catch (error) {
-    // Handle errors
     console.error("Error retrieving product from Stripe:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -31,7 +27,7 @@ const getProducts = async (req, res) => {
   }
 };
 
-// Create a product on Stripe
+// Adding a new product in Stripe
 const newProduct = async (req, res) => {
   const { name, description, price, imageUrl } = req.body;
 
@@ -47,7 +43,6 @@ const newProduct = async (req, res) => {
       },
     });
 
-    // Fetch the product to check if it has been created successfully
     const fetchedProduct = await stripe.products.retrieve(product.id);
 
     res.json({ productId: fetchedProduct.id });

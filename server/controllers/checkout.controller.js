@@ -1,7 +1,6 @@
 const { initStripe } = require("../stripe");
 const stripe = initStripe();
 const { OrderModel } = require("../models/order.model");
-const { Types } = require("mongoose");
 
 const CLIENT_URL = "http://localhost:5173";
 
@@ -73,12 +72,12 @@ const createCheckoutSession = async (req, res) => {
   }
 };
 
+// verifyes and saves order to database
 const verifyStripeSession = async (req, res) => {
   try {
     // Retrieve a checkout session
     const session = await stripe.checkout.sessions.retrieve(req.body.sessionId);
 
-    // Exit code block if the session order has not been paid for
     if (session.payment_status !== "paid") {
       return res.status(400).json({ verified: false });
     }
@@ -102,12 +101,7 @@ const verifyStripeSession = async (req, res) => {
       };
     });
 
-    // Use Promise.all to wait for all promises to resolve
     const products = await Promise.all(productPromises);
-    console.log("line_items", lineItems);
-
-    console.log("products", products);
-    console.log("session", session.shipping_details);
 
     // Extracting shipping details from the session
     const shippingDetails = {
@@ -121,9 +115,6 @@ const verifyStripeSession = async (req, res) => {
       },
     };
 
-    console.log("shippingDetails", shippingDetails);
-
-    // Create a new order instance using the OrderModel
     const order = new OrderModel({
       customer: req.session._id,
       orderNumber: session.payment_intent.substring(3),
@@ -134,17 +125,15 @@ const verifyStripeSession = async (req, res) => {
     });
 
     console.log("order", order);
-    // Save the order to MongoDB
     await order.save();
 
-    // Send a successful verification response
+    // Sending a successful verification response
     res.status(200).json({ verified: true, orderId: order._id });
   } catch (error) {
     console.error("Error in verifyStripeSession:", error.message);
     if (error.details) {
       console.error("Validation error details:", error.details);
     }
-    // Send error response to the client
     res.status(500).json({ verified: false, error: "Internal Server Error" });
   }
 };

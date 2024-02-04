@@ -1,10 +1,7 @@
-const fs = require("fs");
 const bcrypt = require("bcrypt");
 const { initStripe } = require("../stripe");
 const stripe = initStripe();
-const CustomerDB = "./db/customerDB.json";
 const { UserModel } = require("../models/customer.model");
-const { log } = require("console");
 
 const createCustomer = async (req, res) => {
   const customerData = req.body;
@@ -15,13 +12,6 @@ const createCustomer = async (req, res) => {
   });
 
   if (customer) {
-    const newCustomer = {
-      id: customer.id,
-      name: customerData.name,
-      email: customer.email,
-      password: "",
-    };
-
     // Check if the user exists
 
     const existingUser = await UserModel.findOne({ email: req.body.email });
@@ -63,7 +53,7 @@ const logInCustomer = async (req, res) => {
     return res.status(200).json(user);
   }
 
-  // Save info about the user to the session (an encrypted cookie stored on the client)
+  // Save info about the user to the session
   req.session = user;
   res.status(200).json(user);
 };

@@ -1,9 +1,9 @@
 const { OrderModel } = require("../models/order.model");
 
-const ITEMS_PER_PAGE = 10; // Adjust as needed
+const ITEMS_PER_PAGE = 10;
 
 const getAllOrders = async (req, res) => {
-  const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
+  const page = parseInt(req.query.page) || 1;
   const query = req.session.isAdmin ? {} : { customer: req.session._id };
 
   try {

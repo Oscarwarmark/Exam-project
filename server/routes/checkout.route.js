@@ -5,7 +5,6 @@ const {
   verifyStripeSession,
   getOrderDetails,
 } = require("../controllers/checkout.controller");
-// router.use(express.json());
 
 router.post("/", createCheckoutSession);
 router.post("/verify", verifyStripeSession);
