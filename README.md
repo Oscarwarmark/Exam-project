@@ -7,7 +7,4 @@ node.js and express backend. to handle payments i use stripe and mongoDB as my d
 
 ### Built With
 
-- <img src="./icons/React-Dark.svg" width="48">
-- <img src="./icons/NodeJS-Dark.svg" width="48">
-- <img src="./icons/ExpressJS-Dark.svg" width="48">
-- <img src="./icons/MongoDB.svg" width="48">
+[![My Skills](https://skillicons.dev/icons?i=react,html,css,wasm)](https://skillicons.dev)
