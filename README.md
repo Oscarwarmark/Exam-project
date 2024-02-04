@@ -12,15 +12,7 @@ node.js and express backend. to handle payments i use stripe and mongoDB as my d
 ### Installing and running the project
 
 1. Clone the project
-2. Install all necessary dependencies in both the client and server directory
-
-```md
-npm install
-```
-
+2. Install all necessary dependencies in both the client and server directory using `npm install`
 3. In the server directory, rename the “.env template” file to “.env” and provide both the stripe API key and the MongoDB Connection String.
-4. Start the server and client with the following command
-
-```md
-npm run dev
-```
+4. Start the server and client with `npm run dev`
+5. Navigate to http://localhost:5173/ on your preferred web browser to see the application in action!
