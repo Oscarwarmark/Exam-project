@@ -62,7 +62,7 @@ const OrderDetails = () => {
           <div>
             <h2>Produkter</h2>
             {order.orderItems.map((product, i) => (
-              <div className="order-products">
+              <div key={i} className="order-products">
                 <p>{product.quantity} st</p>
                 <p>{product.productName}:</p>
                 <p>{`${product.unitPrice} kr`}</p>
@@ -81,12 +81,14 @@ const OrderDetails = () => {
           <p>Order #{order.orderNumber}</p>
           <div className="address-container">
             <h3>Address</h3>
-            <p>
+            <div>
               <p>Namn: {order.shippingDetails.name}</p>
               <p>Gatuadress: {order.shippingDetails.address.line1}</p>
-              stad: {order.shippingDetails.address.city},
-              {order.shippingDetails.address.postalCode}
-            </p>
+              <p>
+                stad: {order.shippingDetails.address.city},
+                {order.shippingDetails.address.postalCode}
+              </p>
+            </div>
           </div>
           <div>
             <p style={{ margin: "0px" }}>
