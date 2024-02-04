@@ -13,7 +13,6 @@ const createCustomer = async (req, res) => {
 
   if (customer) {
     // Check if the user exists
-
     const existingUser = await UserModel.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(409).json("Email already registred");

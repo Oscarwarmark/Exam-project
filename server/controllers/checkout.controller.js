@@ -75,19 +75,18 @@ const createCheckoutSession = async (req, res) => {
 // verifyes and saves order to database
 const verifyStripeSession = async (req, res) => {
   try {
-    // Retrieve a checkout session
+    //Retrieving a checkout session
     const session = await stripe.checkout.sessions.retrieve(req.body.sessionId);
 
     if (session.payment_status !== "paid") {
       return res.status(400).json({ verified: false });
     }
 
-    // Retrieve line items associated with the session
     const lineItems = await stripe.checkout.sessions.listLineItems(
       req.body.sessionId
     );
 
-    // Retrieve product information for each line item
+    // Retrieving product information for each line item
     const productPromises = lineItems.data.map(async (item) => {
       const product = await stripe.products.retrieve(item.price.product);
       return {
@@ -103,7 +102,7 @@ const verifyStripeSession = async (req, res) => {
 
     const products = await Promise.all(productPromises);
 
-    // Extracting shipping details from the session
+    // shipping details from the session
     const shippingDetails = {
       name: session.shipping_details.name,
       address: {
@@ -127,7 +126,6 @@ const verifyStripeSession = async (req, res) => {
     console.log("order", order);
     await order.save();
 
-    // Sending a successful verification response
     res.status(200).json({ verified: true, orderId: order._id });
   } catch (error) {
     console.error("Error in verifyStripeSession:", error.message);
